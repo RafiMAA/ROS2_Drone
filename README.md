@@ -14,22 +14,22 @@ The drone navigates a user-defined survey grid, classifies each point as **water
 
 ---
 
-## ✨ Key Features
+## Key Features
 
 | Feature | Description |
 |---|---|
-| **🗺️ Interactive GCS** | Real-time 2D map canvas with waypoint planning, drag-and-drop mission control, and live drone telemetry |
-| **📡 Live Telemetry** | Continuous position, altitude, heading, flight mode, and battery data streamed over ROS 2 → WebSocket |
-| **🔍 Surface Classification** | HSV color-thresholding on a gimbal camera feed to distinguish water from soil in real time |
-| **📏 Sonar Depth Sensing** | Boom-mounted sonar descends into water bodies, measures depth to the lakebed |
-| **🧮 Volume Computation** | Automatic water volume and fill-percentage calculation from the survey grid |
-| **📊 3D Bathymetry View** | Interactive Three.js visualization of the scanned underwater terrain |
-| **🎯 Autonomous Survey** | State-machine-driven mission: GUIDED flight → classify → descend → measure → ascend → next waypoint → RTL |
-| **🎮 Gimbal Control** | Automated gimbal pitch-down during survey for nadir camera/sonar alignment |
+| **Interactive GCS** | Real-time 2D map canvas with waypoint planning, drag-and-drop mission control, and live drone telemetry |
+| **Live Telemetry** | Continuous position, altitude, heading, flight mode, and battery data streamed over ROS 2 → WebSocket |
+| **Surface Classification** | HSV color-thresholding on a gimbal camera feed to distinguish water from soil in real time |
+| **Sonar Depth Sensing** | Boom-mounted sonar descends into water bodies, measures depth to the lakebed |
+| **Volume Computation** | Automatic water volume and fill-percentage calculation from the survey grid |
+| **3D Bathymetry View** | Interactive Three.js visualization of the scanned underwater terrain |
+| **Autonomous Survey** | State-machine-driven mission: GUIDED flight → classify → descend → measure → ascend → next waypoint → RTL |
+| **Gimbal Control** | Automated gimbal pitch-down during survey for nadir camera/sonar alignment |
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -80,7 +80,7 @@ The drone navigates a user-defined survey grid, classifies each point as **water
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ROS2_Drone/
@@ -124,7 +124,7 @@ ROS2_Drone/
 
 ---
 
-## 🛠️ Prerequisites
+## Prerequisites
 
 | Dependency | Version | Purpose |
 |---|---|---|
@@ -152,7 +152,7 @@ sudo apt install \
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Clone the Repository
 
@@ -192,7 +192,7 @@ cd ../..
 
 ---
 
-## ▶️ Running the System
+## Running the System
 
 The system requires **5 terminals**. Each step must be run in order:
 
@@ -231,7 +231,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 🎮 Usage
+## Usage
 
 1. **Launch all terminals** as described above and wait for `All nodes launched!` in Terminal 3.
 2. **Open the GCS** at `http://localhost:5173`. The connection indicator should show **CONNECTED**.
@@ -249,7 +249,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 🔌 ROS 2 Topics
+## ROS 2 Topics
 
 ### Published by `drone_control` Nodes
 
@@ -276,7 +276,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 🧩 ROS 2 Nodes
+## ROS 2 Nodes
 
 | Node | File | Purpose |
 |---|---|---|
@@ -288,7 +288,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 🌍 Simulation Worlds
+## Simulation Worlds
 
 | World File | Description |
 |---|---|
@@ -300,7 +300,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 🛡️ Tech Stack
+## Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -317,7 +317,7 @@ Open **http://localhost:5173** in your browser.
 
 ---
 
-## 📄 License
+## License
 
 This project is provided as-is for educational and research purposes. ArduPilot and Gazebo plugins (`ardupilot_gazebo`) retain their respective upstream licenses.
 
