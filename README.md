@@ -322,7 +322,3 @@ Open **http://localhost:5173** in your browser.
 This project is provided as-is for educational and research purposes. ArduPilot and Gazebo plugins (`ardupilot_gazebo`) retain their respective upstream licenses.
 
 ---
-
-<p align="center">
-  Built with ❤️ using ROS 2 • ArduPilot • Gazebo • React
-</p>
