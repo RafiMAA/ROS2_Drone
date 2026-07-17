@@ -1,0 +1,35 @@
+1.Start Gazebo (Terminal 1)
+
+export GZ_SIM_RESOURCE_PATH=~/Desktop/ROS2_Drone/src/ardupilot_gazebo/models:~/Desktop/ROS2_Drone/src/ardupilot_gazebo/worlds:$GZ_SIM_RESOURCE_PATH
+gz sim ~/Desktop/ROS2_Drone/src/ardupilot_gazebo/worlds/iris_terrain.sdf
+
+
+
+2. Start ArduPilot (Terminal 2)
+
+source ~/venv-ardupilot/bin/activate
+cd ~/Desktop/ROS2_Drone/src/ardupilot
+sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON --map --console
+
+
+
+3. Start the ROS 2 Bridge & MAVROS (Terminal 3)
+
+cd ~/Desktop/ROS2_Drone
+./launch_ros.sh
+
+
+
+4. Capture the Map (Terminal 4)
+
+source /opt/ros/jazzy/setup.bash
+source ~/Desktop/ROS2_Drone/install/setup.bash
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+ros2 run drone_control capture_map
+
+
+
+5. Start React GCS (Terminal 5)
+
+cd ~/Desktop/ROS2_Drone/src/drone_gcs
+npm run dev

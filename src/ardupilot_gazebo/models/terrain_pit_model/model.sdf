@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <model name="terrain_pit_model">
+    <static>true</static>
+    <pose>0 0 0 0 0 0</pose>
+
+    <!-- ═══════════════════════════════════════════
+         TERRAIN LINK
+         1500 x 1500 x 5 m box with 400 m cylindrical pit
+         ═══════════════════════════════════════════ -->
+    <link name="terrain_link">
+      <pose>0 0 0 0 0 0</pose>
+
+      <!-- Visual: full terrain mesh with baked grass texture -->
+      <visual name="terrain_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://terrain_pit_model/meshes/terrain.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.12 0.32 0.05 1.0</ambient>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <specular>0.03 0.03 0.03 1.0</specular>
+          <emissive>0 0 0 1</emissive>
+          <pbr>
+            <metal>
+              <albedo_map>model://terrain_pit_model/textures/grass_color.png</albedo_map>
+              <roughness_map>model://terrain_pit_model/textures/grass_roughness.png</roughness_map>
+              <metalness>0.0</metalness>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+
+      <!-- Collision: full mesh collision so sonar can detect the pit -->
+      <collision name="terrain_collision">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://terrain_pit_model/meshes/terrain.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>0.8</mu>
+              <mu2>0.8</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode>
+              <soft_cfm>0.0</soft_cfm>
+              <soft_erp>0.2</soft_erp>
+            </ode>
+          </contact>
+        </surface>
+      </collision>
+
+    </link>
+
+    <!-- ═══════════════════════════════════════════
+         TREES LINK
+         All 350 low-poly proxy trees, joined mesh
+         ═══════════════════════════════════════════ -->
+    <link name="trees_link">
+      <pose>0 0 0 0 0 0</pose>
+      <visual name="trees_visual">
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://terrain_pit_model/meshes/trees.obj</uri>
+            <scale>1 1 1</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <ambient>0.05 0.20 0.03 1.0</ambient>
+          <diffuse>0.10 0.35 0.06 1.0</diffuse>
+          <specular>0.01 0.01 0.01 1.0</specular>
+        </material>
+      </visual>
+    </link>
+
+  </model>
+</sdf>

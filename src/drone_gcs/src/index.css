@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════
+   index.css — Design tokens & global styles (Dark Glassmorphic)
+   ═══════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ── CSS Custom Properties ── */
+:root {
+  /* Background */
+  --bg-base: #060a13;
+  --bg-surface: rgba(12, 18, 32, 0.88);
+  --bg-elevated: rgba(18, 26, 45, 0.92);
+  --bg-overlay: rgba(6, 10, 19, 0.7);
+
+  /* Accent palette */
+  --accent-primary: #00e5ff;
+  --accent-primary-dim: rgba(0, 229, 255, 0.15);
+  --accent-primary-glow: rgba(0, 229, 255, 0.3);
+  --accent-success: #00e676;
+  --accent-success-dim: rgba(0, 230, 118, 0.15);
+  --accent-warning: #ffab00;
+  --accent-warning-dim: rgba(255, 171, 0, 0.15);
+  --accent-danger: #ff1744;
+  --accent-danger-dim: rgba(255, 23, 68, 0.15);
+
+  /* Text */
+  --text-primary: #e8ecf4;
+  --text-secondary: rgba(232, 236, 244, 0.6);
+  --text-muted: rgba(232, 236, 244, 0.35);
+
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(0, 229, 255, 0.25);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(0, 229, 255, 0.15);
+
+  /* Glass */
+  --glass-blur: blur(20px);
+  --glass-bg: rgba(12, 18, 32, 0.75);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-primary);
+  background: var(--bg-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Selection ── */
+::selection {
+  background: var(--accent-primary-dim);
+  color: var(--accent-primary);
+}

@@ -1,0 +1,197 @@
+<?xml version="1.0" ?>
+<sdf version="1.9">
+  <world name="iris_terrain">
+    <physics name="1ms" type="ignore">
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1.0</real_time_factor>
+    </physics>
+
+    <plugin filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-sensors-system"
+      name="gz::sim::systems::Sensors">
+      <render_engine>ogre2</render_engine>
+    </plugin>
+    <plugin filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+    <plugin filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin filename="gz-sim-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+    <plugin filename="gz-sim-navsat-system"
+      name="gz::sim::systems::NavSat">
+    </plugin>
+
+    <scene>
+      <ambient>1.0 1.0 1.0</ambient>
+      <background>0.8 0.8 0.8</background>
+      <sky></sky>
+    </scene>
+
+    <spherical_coordinates>
+      <latitude_deg>-35.363262</latitude_deg>
+      <longitude_deg>149.165237</longitude_deg>
+      <elevation>584</elevation>
+      <heading_deg>0</heading_deg>
+      <surface_model>EARTH_WGS84</surface_model>
+    </spherical_coordinates>
+
+    <light type="directional" name="sun">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.8 0.8 0.8 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="axes">
+      <static>1</static>
+      <link name="link">
+        <visual name="r">
+          <cast_shadows>0</cast_shadows>
+          <pose>5 0 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>10 0.01 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>1 0 0 0.8</ambient>
+            <diffuse>1 0 0 0.8</diffuse>
+            <emissive>1 0 0 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <visual name="g">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 5 0.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 10 0.01</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 1 0 0.8</ambient>
+            <diffuse>0 1 0 0.8</diffuse>
+            <emissive>0 1 0 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <visual name="b">
+          <cast_shadows>0</cast_shadows>
+          <pose>0 0 5.1 0 0 0</pose>
+          <geometry>
+            <box>
+              <size>0.01 0.01 10</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0 0 1 0.8</ambient>
+            <diffuse>0 0 1 0.8</diffuse>
+            <emissive>0 0 1 0.8</emissive>
+            <specular>0.5 0.5 0.5 0.8</specular>
+          </material>
+        </visual>
+        <sensor name="navsat_sensor" type="navsat">
+          <always_on>1</always_on>
+          <update_rate>1</update_rate>
+        </sensor>
+      </link>
+    </model>
+    
+    <include>
+      <uri>model://terrain_pit_model</uri>
+      <pose degrees="true">0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- ═══════════════════════════════════════════════
+         Water Layer
+         Transparent blue box filling the pit at Z = -1.0m.
+         Includes collision so sonar can detect the surface.
+         ═══════════════════════════════════════════════ -->
+    <model name="water_plane">
+      <static>true</static>
+      <pose>0 0 -1.0 0 0 0</pose>
+      <link name="link">
+        <visual name="water_visual">
+          <geometry>
+            <box>
+              <size>800 800 0.1</size>
+            </box>
+          </geometry>
+          <material>
+            <ambient>0.0 0.4 0.8 0.5</ambient>
+            <diffuse>0.0 0.4 0.8 0.5</diffuse>
+            <specular>0.5 0.5 0.5 0.5</specular>
+          </material>
+          <!-- Set transparent property for older gazebo versions -->
+          <transparency>0.5</transparency>
+        </visual>
+        <collision name="water_collision">
+          <geometry>
+            <box>
+              <size>400 400 0.1</size>
+            </box>
+          </geometry>
+        </collision>
+      </link>
+    </model>
+
+    <include>
+      <uri>model://iris_with_gimbal</uri>
+      <pose degrees="true">0 -420 0.195 0 0 90</pose>
+      <plugin filename="gz-sim-pose-publisher-system"
+        name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <publish_nested_model_pose>true</publish_nested_model_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <update_frequency>10</update_frequency>
+      </plugin>
+    </include>
+    <!-- ═══════════════════════════════════════════════
+         Overhead Camera for Auto-Capturing map.png
+         Positioned at 1200m looking straight down
+         ═══════════════════════════════════════════════ -->
+    <model name="overhead_camera">
+      <static>true</static>
+      <pose>0 0 1200 0 1.5708 1.5708</pose>
+      <plugin filename="gz-sim-pose-publisher-system"
+        name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>true</publish_link_pose>
+        <use_pose_vector_msg>true</use_pose_vector_msg>
+        <update_frequency>10</update_frequency>
+      </plugin>
+      <link name="camera_link">
+        <sensor name="overhead_cam" type="camera">
+          <always_on>true</always_on>
+          <update_rate>1</update_rate>
+          <camera>
+            <horizontal_fov>1.39626</horizontal_fov>
+            <image>
+              <width>960</width>
+              <height>960</height>
+              <format>R8G8B8</format>
+            </image>
+            <clip>
+              <near>1.0</near>
+              <far>2500.0</far>
+            </clip>
+          </camera>
+          <topic>overhead_camera/image</topic>
+        </sensor>
+      </link>
+    </model>
+
+  </world>
+</sdf>
